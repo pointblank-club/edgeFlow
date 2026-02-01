@@ -74,19 +74,11 @@ edgeflow --help
 
 > **Note**: You may see a warning about missing 'dynamic_device_profiles'. This is expected and doesn't affect functionality.
 
-### 3. Run Example
+### 3. Create Your Own Config
 
-```bash
-# View the example configuration
-cat examples/quick_start.ef
+Create a file `my_config.ef` in the project root directory:
 
-# Run the compiler (note: requires a .tflite model file)
-edgeflow examples/quick_start.ef
-```
-
-### 4. Create Your Own Config
-
-Create a file `my_config.ef`:
+> **Note:** You'll need an actual TensorFlow Lite model file (`.tflite`). You can also use `.h5`, `.onnx`, or `.keras` format models.
 
 ```
 model = "path/to/your/model.tflite"
@@ -108,7 +100,7 @@ If you prefer not to install, set `PYTHONPATH`:
 
 ```bash
 export PYTHONPATH=$(pwd)/src
-python -m edgeflow.compiler.edgeflowc examples/quick_start.ef
+python -m edgeflow.compiler.edgeflowc my_config.ef
 ```
 
 ## Usage
