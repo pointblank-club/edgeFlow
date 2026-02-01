@@ -78,6 +78,8 @@ edgeflow --help
 
 Create a file `my_config.ef` in the project root directory:
 
+> **Note:** You'll need an actual TensorFlow Lite model file (`.tflite`). You can also use `.h5`, `.onnx`, or `.keras` format models.
+
 ```
 model = "path/to/your/model.tflite"
 output = "optimized_model.tflite"
