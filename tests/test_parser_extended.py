@@ -8,6 +8,7 @@ from edgeflow.parser import (
     parse_edgeflow_string,
     validate_config,
 )
+from edgeflow.compiler.backend_codegen import EdgeBackendCCode
 from unittest.mock import patch
 
 import pytest
@@ -227,3 +228,14 @@ class TestModuleAttributes:
         assert callable(parser.parse_edgeflow_string)
         assert callable(parser.parse_edgeflow_file)
         assert callable(parser.validate_config)
+
+    def test_c_identifier_sanitization(self):
+        backend = EdgeBackendCCode()
+        # Test hyphen and dot replacement
+        assert backend._sanitize_identifier("layer-1.input") == "LAYER_1_INPUT"
+        # Test leading digit (C identifiers cannot start with numbers)
+        assert backend._sanitize_identifier("2nd_layer") == "_2ND_LAYER"
+        # Test special characters
+        assert backend._sanitize_identifier("node@link") == "NODE_LINK"
+        # Test spaces
+        assert backend._sanitize_identifier("final layer") == "FINAL_LAYER"
