@@ -9,6 +9,7 @@ provide a foundation for richer backends (LLVM, ARM CMSIS, TFLite flatbuffers).
 from __future__ import annotations
 
 import os
+import re
 from dataclasses import dataclass
 from typing import Any, Dict, List, Protocol
 
@@ -45,6 +46,16 @@ class EdgeBackendCCode:
 
     def __init__(self, options: CBackendOptions | None = None) -> None:
         self.options = options or CBackendOptions()
+
+    def _sanitize_identifier(self, name: str) -> str:
+        # Replace any character that isn't a letter, number, or underscore with '_'
+        sanitized = re.sub(r"[^a-zA-Z0-9_]", "_", name)
+
+        # Task 3: Ensure it's a valid C token (cannot start with a digit)
+        if sanitized and sanitized[0].isdigit():
+            sanitized = "_" + sanitized
+
+        return sanitized.upper()
 
     def generate(
         self, ir_graph: Any, target_config: Dict[str, Any]
