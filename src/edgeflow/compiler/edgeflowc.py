@@ -834,15 +834,15 @@ def main() -> int:
         files["tensorrt"] = os.path.join(output_dir, "inference_tensorrt.py")
         files["report"] = os.path.join(output_dir, "optimization_report.md")
 
-        with open(files["python"], "w") as f:
+        with open(files["python"], "w", encoding="utf-8") as f:
             f.write(python_code)
-        with open(files["cpp"], "w") as f:
+        with open(files["cpp"], "w", encoding="utf-8") as f:
             f.write(cpp_code)
-        with open(files["onnx"], "w") as f:
+        with open(files["onnx"], "w", encoding="utf-8") as f:
             f.write(onnx_code)
-        with open(files["tensorrt"], "w") as f:
+        with open(files["tensorrt"], "w", encoding="utf-8") as f:
             f.write(tensorrt_code)
-        with open(files["report"], "w") as f:
+        with open(files["report"], "w", encoding="utf-8") as f:
             f.write(report)
 
         logging.info("Saved generated files to %s:", output_dir)
@@ -927,7 +927,7 @@ def main() -> int:
                 explainability_path = os.path.join(
                     output_dir, "explainability_report.md"
                 )
-                with open(explainability_path, "w") as f:
+                with open(explainability_path, "w", encoding="utf-8") as f:
                     f.write(explainability_report)
 
                 logging.info(
